@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Game</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0d1b3d;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+overflow:hidden;
+}
+
+/* PRESS START */
+
+#pressStart{cursor:pointer;}
+.piscar{animation:piscando 1s infinite;}
+
+@keyframes piscando{
+50%{opacity:0.3;}
+}
+
+/* QUIZ */
+
+#quiz{display:none;}
+
+button{
+padding:12px 20px;
+margin:8px;
+border:none;
+border-radius:8px;
+background:#2a6cff;
+color:white;
+cursor:pointer;
+}
+
+/* PROGRESSO */
+
+#progressBar{
+width:100%;
+background:#333;
+height:10px;
+border-radius:10px;
+margin-bottom:20px;
+overflow:hidden;
+}
+
+#progress{
+height:100%;
+width:0%;
+background:#00ffae;
+transition:0.5s;
+}
+
+/* CONQUISTA */
+
+#achievement{
+display:none;
+position:fixed;
+top:20px;
+right:20px;
+background:black;
+padding:15px;
+border-radius:12px;
+}
+
+#achievement img{width:120px;}
+
+/* EASTER EGG */
+
+#gatoEgg{
+width:160px;
+cursor:pointer;
+margin-top:15px;
+opacity:0.7;
+transition:.3s;
+}
+
+#gatoEgg:hover{transform:scale(1.1);}
+
+#segredo{
+display:none;
+margin-top:10px;
+color:#ffd166;
+}
+
+/* PLAYER SECRETO */
+
+#spotifyEgg{
+display:none;
+margin-top:20px;
+}
+
+/* FINAL */
+
+#final{
+display:none;
+background:white;
+color:black;
+padding:25px;
+border-radius:15px;
+max-width:700px;
+}
+
+#textoFinal{
+white-space:pre-line;
+line-height:1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div>
+
+<!-- PRESS START -->
+<div id="pressStart" onclick="startGame()">
+
+<h1>Que isso? Um minigame? Aperta Start ai pra ver</h1>
+<p class="piscar">PRESS START</p>
+
+<img id="gatoEgg"
+src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif"
+onclick="easterEgg(event)">
+
+<p id="segredo">Você encontrou um segredo da Anna...</p>
+
+<div id="spotifyEgg">
+<h3>🎵 Música secreta desbloqueada</h3>
+
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/track/6YXG34IWbilypPwjBTOrUC"
+width="300"
+height="152"
+frameBorder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+
+</div>
+
+</div>
+
+<!-- QUIZ -->
+<div id="quiz">
+
+<div id="progressBar">
+<div id="progress"></div>
+</div>
+
+<h2 id="pergunta"></h2>
+<div id="respostas"></div>
+
+</div>
+
+<!-- CONQUISTA -->
+<div id="achievement">
+<h3 id="achTitle"></h3>
+<img id="achGif">
+</div>
+
+<!-- FINAL -->
+<div id="final">
+
+<h2>🏆 PLATINA DESBLOQUEADA</h2>
+
+<button onclick="mostrarCarta()">Resgatar prêmio secreto</button>
+
+<p id="textoFinal"></p>
+
+<img width="220"
+src="https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif">
+
+</div>
+
+</div>
+
+<audio id="som">
+<source src="https://assets.mixkit.co/sfx/preview/mixkit-game-achievement-610.mp3">
+</audio>
+
+<script>
+
+/* =========================
+   PRESS START
+=========================*/
+
+function startGame(){
+document.getElementById("pressStart").style.display="none";
+document.getElementById("quiz").style.display="block";
+mostrarPergunta();
+}
+
+/* =========================
+   EASTER EGG MUSICAL
+=========================*/
+
+let clicks=0;
+
+function easterEgg(e){
+e.stopPropagation();
+
+clicks++;
+
+document.getElementById("segredo").style.display="block";
+
+/* precisa clicar 3x */
+if(clicks>=3){
+document.getElementById("spotifyEgg").style.display="block";
+}
+}
+
+/* =========================
+   PERGUNTAS
+=========================*/
+
+const perguntas=[
+{q:"Questão 1: O que eu (Anna) mais gosto de fazer quando preparo uma surpresa para você?",op:["Aprontar.","Te tirar um sorriso.","Fazer você ficar bobinha.","Fazer você se sentir feliz e amada.","Todas as alternativas acima."],certa:4,conquista:"Aprontona Iniciante",gif:"https://media1.tenor.com/m/U2GZkWxTylQAAAAC/kitten-dance.gif"},
+{q:"Questão 2: Qual banda/artista nos uniu e qual música dessa banda/artista MAIS me lembra você?",op:["Linkin Park – Waiting for the End","Demi Lovato – o álbum de rock, vulgo Holy Fvck","Paramore – Hate to see your heart break","Alceu Valença – Flor de Tangerina","Kid Abelha - Lágrimas e Chuva"],certa:2,conquista:"Aprontona Musical",gif:"https://media1.tenor.com/m/IPvK5n4RNw0AAAAC/pet-music.gif"},
+{q:"Questão 3: Qual desses jogos aqui foi o que começou de fato todas as brincadeiras bobas e gostosas do nosso trelelê?",op:["Dark Souls","God of War","The Last of Us Part 2","Mario","Uncharted"],certa:2,conquista:"Aprontona Gamer",gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"},
+{q:"Questão 4: Qual dia eu abri meu coração pra você sobre meus sentimentos? Você se lembra? Agora o bicho começa a pegar haha. Obs: Não vale colar olhando no zap.",op:["10/01/26","05/02/26","27/11/25","10/12/25","12/02/26"],certa:3,conquista:"Aprontona Emocionada",gif:"https://media1.tenor.com/m/td08jkIW7BsAAAAd/kira1310-rizz.gif"},
+{q:"Questão 5: Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",op:["A Kika.","Uma belíssima morena de olhos castanhos de Recife.","Você.","Eu já mencionei uma moça de olhos castanhos?!","Talvez todas as alternativas hehe"],certa:4,conquista:"🏆 PLATINA",gif:"https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif"}
+];
+
+let atual=0;
+
+function mostrarPergunta(){
+
+if(atual>=perguntas.length){
+mostrarPlatina();
+return;
+}
+
+const p=perguntas[atual];
+
+document.getElementById("pergunta").innerText=p.q;
+
+const area=document.getElementById("respostas");
+area.innerHTML="";
+
+p.op.forEach((op,i)=>{
+const btn=document.createElement("button");
+btn.innerText=op;
+btn.onclick=()=>responder(i);
+area.appendChild(btn);
+});
+
+atualizarProgresso();
+}
+
+function responder(i){
+
+if(i===perguntas[atual].certa){
+mostrarConquista();
+atual++;
+setTimeout(mostrarPergunta,2200);
+}else{
+alert("❌ Oh noooous... game over 😓");
+location.reload();
+}
+}
+
+function atualizarProgresso(){
+const progresso=(atual/perguntas.length)*100;
+document.getElementById("progress").style.width=progresso+"%";
+}
+
+/* =========================
+   CONQUISTA
+=========================*/
+
+function mostrarConquista(){
+
+document.getElementById("som").play();
+
+const ach=document.getElementById("achievement");
+
+document.getElementById("achTitle").innerText=
+"Conquista desbloqueada: "+perguntas[atual].conquista;
+
+document.getElementById("achGif").src=
+perguntas[atual].gif;
+
+ach.style.display="block";
+
+setTimeout(()=>ach.style.display="none",2000);
+}
+
+/* =========================
+   FINAL
+=========================*/
+
+function mostrarPlatina(){
+document.getElementById("quiz").style.display="none";
+document.getElementById("final").style.display="block";
+}
+
+function mostrarCarta(){
+
+const texto=`Parabéns jogadora, você conseguiu gabaritar todo o game e como recompensa, aqui teremos uma nota especial da desenvolvedora do game para você. 
+
+Ora, ora, ora, não é que a minha morena de belos olhos castanhos conseguiu platinar o meu game?! Só tendo os olhos MAIS LINDOS e BRILHANTES desse mundo para gabaritar tudo hehe. Estou um pouco quanto emocionada, você respondeu tudo certinho, o que significa que tu se lembra de tudo sobre nós, tal qual eu lembro de tudin, apesar de ter uma péssima memória, tudo o que vem de você sempre fica na minha mente.
+
+Novamente eu aprontei com programação, tudo para conquistar seu belo coração, ih rapaz, rimei rs. Mas é uma delicia trabalhar nesses aprontamentos só pra saber que no final das contas eu irei conseguir tirar um sorriso (às vezes até um choro kkk) da mina que eu gosto. 
+
+Meu bem, não sei o que acontece comigo, mas quando se trata de você e principalmente de nós eu sempre quero de alguma forma demonstrar carinho, por isso os aprontamentos quase que semanais kkkk. Mas eu não resisto aprontar de certa forma contigo, bons aprontamentos, obviamente.
+
+Agora como bônus do bônus, aqui vai uma dica de um tal presente que eu comprei pra você, que será entregue em mões, a dica é ‘você me diz que eu sou luz, seria eu a luz da sua animação preferida?!’, ficou meio complicada essa dica, mas você vai catar, eu tenho certeza! Bom, a gente se vê em breve em um novo aprotamento ou pessoalmente recebendo esse presente, não seeeei, joguei no ar hehe 💖.`;
+
+let i=0;
+const el=document.getElementById("textoFinal");
+
+function digitar(){
+if(i<texto.length){
+el.textContent+=texto.charAt(i);
+i++;
+setTimeout(digitar,30);
+}
+}
+
+digitar();
+}
+
+</script>
+
+</body>
+</html>
