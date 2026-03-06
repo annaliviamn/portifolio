@@ -97,13 +97,6 @@ margin-top:10px;
 color:#ffd166;
 }
 
-/* spotify */
-
-#spotify{
-display:none;
-margin-top:15px;
-}
-
 /* FINAL */
 
 #final{
@@ -122,12 +115,10 @@ white-space:pre-line;
 line-height:1.6;
 }
 
-/* gatinho final centralizado */
-
-#gifFinal{
+#gatinhoFinal{
 display:none;
-margin:20px auto;
-width:220px;
+margin:auto;
+margin-top:20px;
 }
 
 </style>
@@ -139,18 +130,16 @@ width:220px;
 
 <!-- PRESS START -->
 <div id="pressStart" onclick="startGame()">
-
 <h1>Que isso? Um minigame? Aperta Start ai pra ver</h1>
-
 <p class="piscar">PRESS START</p>
 
 <img id="gatoEgg"
 src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif"
 onclick="easterEgg(event)">
 
-<p id="segredo">Você encontrou um segredinho hehe 👀💖...</p>
+<p id="segredo">💖 Você encontrou um segredo da Anna...</p>
 
-<div id="spotify">
+<div id="spotifyEgg" style="display:none; margin-top:15px;">
 <iframe style="border-radius:12px"
 src="https://open.spotify.com/embed/track/3PlKQNlbL4767rND3HnqSI"
 width="300"
@@ -190,7 +179,8 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 
 <p id="textoFinal"></p>
 
-<img id="gifFinal"
+<img id="gatinhoFinal"
+width="220"
 src="https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif">
 
 </div>
@@ -213,12 +203,22 @@ mostrarPergunta();
 
 /* EASTER EGG */
 
+let segurarTimer;
+
 function easterEgg(e){
 e.stopPropagation();
 
+segurarTimer=setTimeout(()=>{
+
 document.getElementById("segredo").style.display="block";
-document.getElementById("spotify").style.display="block";
+document.getElementById("spotifyEgg").style.display="block";
+
+},1500);
 }
+
+document.getElementById("gatoEgg").addEventListener("mouseup",()=>{
+clearTimeout(segurarTimer);
+});
 
 /* PERGUNTAS */
 
@@ -249,7 +249,7 @@ gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"
 },
 
 {
-q:"Questão 4 –  Qual dia eu abri meu coração pra você sobre meus sentimentos? Você se lembra? Agora o bicho começa a pegar haha. Obs: Não vale colar olhando no zap.",
+q:"Questão 4 – Qual dia eu abri meu coração pra você sobre meus sentimentos?",
 op:["10/01/26","05/02/26","27/11/25","10/12/25","12/02/26"],
 certa:3,
 conquista:"Aprontona Emocionada",
@@ -257,7 +257,7 @@ gif:"https://media1.tenor.com/m/td08jkIW7BsAAAAd/kira1310-rizz.gif"
 },
 
 {
-q:"Questão 5 – Qual dessas coisas eu definitivamente faria?",
+q:"Questão 5 – Qual dessas coisas a Anna definitivamente faria?",
 op:[
 "Programar um jogo inteiro só pra te fazer sorrir.",
 "Aprontar mais uma surpresa semana que vem.",
@@ -271,7 +271,7 @@ gif:"https://media1.tenor.com/m/cKpndeTs1I0AAAAd/cute-cat.gif"
 },
 
 {
-q:"Questão Final – Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",
+q:"Questão Final – Quem conquistou o coração da Anna?",
 op:[
 "A Kika.",
 "Uma belíssima morena de olhos castanhos de Recife.",
@@ -318,16 +318,17 @@ if(i===perguntas[atual].certa){
 
 mostrarConquista();
 
-/* SE FOR A ÚLTIMA PERGUNTA → DRAMA */
+/* DRAMA FINAL */
 
-if(atual === perguntas.length-1){
+if(atual===perguntas.length-1){
 
 setTimeout(()=>{
 
-document.getElementById("quiz").innerHTML = `
+document.getElementById("quiz").innerHTML=`
 <h2>⏳ Calculando resultado final...</h2>
-<p>A desenvolvedora está avaliando suas respostas...</p>
-<p>Isso pode levar alguns segundos...</p>
+<p>Verificando banco de dados...</p>
+<p>Analisando nível de conhecimento sobre nós...</p>
+<p>Resultado quase pronto...</p>
 `;
 
 },1200);
@@ -351,7 +352,7 @@ alert("❌ Oh noooous... game over 😓");
 location.reload();
 
 }
-}
+
 }
 
 function atualizarProgresso(){
@@ -403,18 +404,19 @@ let i=0;
 const el=document.getElementById("textoFinal");
 
 function digitar(){
+
 if(i<texto.length){
 el.textContent+=texto.charAt(i);
 i++;
 setTimeout(digitar,30);
 }else{
-
-document.getElementById("gifFinal").style.display="block";
-
+document.getElementById("gatinhoFinal").style.display="block";
 }
+
 }
 
 digitar();
+
 }
 
 </script>
