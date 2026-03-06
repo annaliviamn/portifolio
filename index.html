@@ -397,6 +397,9 @@ function mostrarDramaFinal(){
 document.getElementById("pergunta").style.display="none";
 document.getElementById("respostas").style.display="none";
 
+/* ESCONDE A BARRA DO QUIZ */
+document.getElementById("progressBar").style.display="none";
+
 const box=document.getElementById("loadingBox");
 box.style.display="block";
 
@@ -404,7 +407,6 @@ const frases=[
 "Verificando banco de dados emocional...",
 "Analisando nível de conhecimento sobre nós...",
 "Consultando registros de momentos fofos...",
-"Calculando porcentagem de amor...",
 "Confirmando que você lembra de tudo...",
 "Resultado encontrado..."
 ];
@@ -483,6 +485,7 @@ digitar();
 
 </body>
 </html>
+
 
 
 
