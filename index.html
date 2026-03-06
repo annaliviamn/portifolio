@@ -16,15 +16,26 @@ color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+min-height:100vh;
 text-align:center;
-overflow:hidden;
+overflow-y:auto;
+padding:20px;
+}
+
+#container{
+max-width:700px;
+width:100%;
 }
 
 /* PRESS START */
 
-#pressStart{cursor:pointer;}
-.piscar{animation:piscando 1s infinite;}
+#pressStart{
+cursor:pointer;
+}
+
+.piscar{
+animation:piscando 1s infinite;
+}
 
 @keyframes piscando{
 50%{opacity:0.3;}
@@ -72,9 +83,12 @@ right:20px;
 background:black;
 padding:15px;
 border-radius:12px;
+z-index:10;
 }
 
-#achievement img{width:120px;}
+#achievement img{
+width:120px;
+}
 
 /* EASTER EGG */
 
@@ -82,11 +96,7 @@ border-radius:12px;
 width:160px;
 cursor:pointer;
 margin-top:15px;
-opacity:0.7;
-transition:.3s;
 }
-
-#gatoEgg:hover{transform:scale(1.1);}
 
 #segredo{
 display:none;
@@ -94,9 +104,7 @@ margin-top:10px;
 color:#ffd166;
 }
 
-/* PLAYER SECRETO */
-
-#spotifyEgg{
+#musicaSecreta{
 display:none;
 margin-top:20px;
 }
@@ -122,28 +130,29 @@ line-height:1.6;
 
 <body>
 
-<div>
+<div id="container">
 
 <!-- PRESS START -->
+
 <div id="pressStart" onclick="startGame()">
 
 <h1>Que isso? Um minigame? Aperta Start ai pra ver</h1>
+
 <p class="piscar">PRESS START</p>
 
 <img id="gatoEgg"
-src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif"
-onclick="easterEgg(event)">
+src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif">
 
-<p id="segredo">Você encontrou um segredo da Anna...</p>
+<p id="segredo">💖 Você encontrou um segredo da Anna...</p>
 
-<div id="spotifyEgg">
-<h3>🎵 Música secreta desbloqueada</h3>
+<div id="musicaSecreta">
 
 <iframe style="border-radius:12px"
-src="https://open.spotify.com/embed/track/6YXG34IWbilypPwjBTOrUC"
-width="300"
+src="https://open.spotify.com/embed/track/3PlKQNlbL4767rND3HnqSI"
+width="100%"
 height="152"
 frameBorder="0"
+allowfullscreen=""
 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
 </iframe>
 
@@ -152,6 +161,7 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 </div>
 
 <!-- QUIZ -->
+
 <div id="quiz">
 
 <div id="progressBar">
@@ -159,17 +169,23 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 </div>
 
 <h2 id="pergunta"></h2>
+
 <div id="respostas"></div>
 
 </div>
 
 <!-- CONQUISTA -->
+
 <div id="achievement">
+
 <h3 id="achTitle"></h3>
+
 <img id="achGif">
+
 </div>
 
 <!-- FINAL -->
+
 <div id="final">
 
 <h2>🏆 PLATINA DESBLOQUEADA</h2>
@@ -191,9 +207,7 @@ src="https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif">
 
 <script>
 
-/* =========================
-   PRESS START
-=========================*/
+/* PRESS START */
 
 function startGame(){
 document.getElementById("pressStart").style.display="none";
@@ -201,35 +215,47 @@ document.getElementById("quiz").style.display="block";
 mostrarPergunta();
 }
 
-/* =========================
-   EASTER EGG MUSICAL
-=========================*/
+/* EASTER EGG SEGURAR GATO */
 
-let clicks=0;
+let tempoSegurando;
 
-function easterEgg(e){
-e.stopPropagation();
+const gato = document.getElementById("gatoEgg");
 
-clicks++;
+gato.addEventListener("mousedown", function(){
+
+tempoSegurando=setTimeout(function(){
 
 document.getElementById("segredo").style.display="block";
+document.getElementById("musicaSecreta").style.display="block";
 
-/* precisa clicar 3x */
-if(clicks>=3){
-document.getElementById("spotifyEgg").style.display="block";
-}
-}
+alert("🏆 Conquista secreta desbloqueada!");
 
-/* =========================
-   PERGUNTAS
-=========================*/
+},2000);
+
+});
+
+gato.addEventListener("mouseup", function(){
+clearTimeout(tempoSegurando);
+});
+
+gato.addEventListener("mouseleave", function(){
+clearTimeout(tempoSegurando);
+});
+
+/* PERGUNTAS */
 
 const perguntas=[
+
 {q:"Questão 1: O que eu (Anna) mais gosto de fazer quando preparo uma surpresa para você?",op:["Aprontar.","Te tirar um sorriso.","Fazer você ficar bobinha.","Fazer você se sentir feliz e amada.","Todas as alternativas acima."],certa:4,conquista:"Aprontona Iniciante",gif:"https://media1.tenor.com/m/U2GZkWxTylQAAAAC/kitten-dance.gif"},
+
 {q:"Questão 2: Qual banda/artista nos uniu e qual música dessa banda/artista MAIS me lembra você?",op:["Linkin Park – Waiting for the End","Demi Lovato – o álbum de rock, vulgo Holy Fvck","Paramore – Hate to see your heart break","Alceu Valença – Flor de Tangerina","Kid Abelha - Lágrimas e Chuva"],certa:2,conquista:"Aprontona Musical",gif:"https://media1.tenor.com/m/IPvK5n4RNw0AAAAC/pet-music.gif"},
-{q:"Questão 3: Qual desses jogos aqui foi o que começou de fato todas as brincadeiras bobas e gostosas do nosso trelelê?",op:["Dark Souls","God of War","The Last of Us Part 2","Mario","Uncharted"],certa:2,conquista:"Aprontona Gamer",gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"},
+
+{q:"Questão 3: Qual desses jogos aqui foi o que começou de fato todas as brincadeiras bobas e gostosas do nosso relacionamento?",op:["Dark Souls","God of War","The Last of Us Part 2","Mario","Uncharted"],certa:2,conquista:"Aprontona Gamer",gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"},
+
 {q:"Questão 4: Qual dia eu abri meu coração pra você sobre meus sentimentos? Você se lembra? Agora o bicho começa a pegar haha. Obs: Não vale colar olhando no zap.",op:["10/01/26","05/02/26","27/11/25","10/12/25","12/02/26"],certa:3,conquista:"Aprontona Emocionada",gif:"https://media1.tenor.com/m/td08jkIW7BsAAAAd/kira1310-rizz.gif"},
+
 {q:"Questão 5: Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",op:["A Kika.","Uma belíssima morena de olhos castanhos de Recife.","Você.","Eu já mencionei uma moça de olhos castanhos?!","Talvez todas as alternativas hehe"],certa:4,conquista:"🏆 PLATINA",gif:"https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif"}
+
 ];
 
 let atual=0;
@@ -246,38 +272,54 @@ const p=perguntas[atual];
 document.getElementById("pergunta").innerText=p.q;
 
 const area=document.getElementById("respostas");
+
 area.innerHTML="";
 
 p.op.forEach((op,i)=>{
+
 const btn=document.createElement("button");
+
 btn.innerText=op;
+
 btn.onclick=()=>responder(i);
+
 area.appendChild(btn);
+
 });
 
 atualizarProgresso();
+
 }
 
 function responder(i){
 
 if(i===perguntas[atual].certa){
+
 mostrarConquista();
+
 atual++;
+
 setTimeout(mostrarPergunta,2200);
+
 }else{
+
 alert("❌ Oh noooous... game over 😓");
+
 location.reload();
+
 }
+
 }
 
 function atualizarProgresso(){
+
 const progresso=(atual/perguntas.length)*100;
+
 document.getElementById("progress").style.width=progresso+"%";
+
 }
 
-/* =========================
-   CONQUISTA
-=========================*/
+/* CONQUISTA */
 
 function mostrarConquista(){
 
@@ -294,41 +336,45 @@ perguntas[atual].gif;
 ach.style.display="block";
 
 setTimeout(()=>ach.style.display="none",2000);
+
 }
 
-/* =========================
-   FINAL
-=========================*/
+/* FINAL */
 
 function mostrarPlatina(){
+
 document.getElementById("quiz").style.display="none";
+
 document.getElementById("final").style.display="block";
+
 }
 
 function mostrarCarta(){
 
-const texto=`Parabéns jogadora, você conseguiu gabaritar todo o game e como recompensa, aqui teremos uma nota especial da desenvolvedora do game para você. 
+const texto=`Parabéns jogadora, você conseguiu gabaritar todo o game e como recompensa, aqui teremos uma nota especial da desenvolvedora do game para você.
 
-Ora, ora, ora, não é que a minha morena de belos olhos castanhos conseguiu platinar o meu game?! Só tendo os olhos MAIS LINDOS e BRILHANTES desse mundo para gabaritar tudo hehe. Estou um pouco quanto emocionada, você respondeu tudo certinho, o que significa que tu se lembra de tudo sobre nós, tal qual eu lembro de tudin, apesar de ter uma péssima memória, tudo o que vem de você sempre fica na minha mente.
-
-Novamente eu aprontei com programação, tudo para conquistar seu belo coração, ih rapaz, rimei rs. Mas é uma delicia trabalhar nesses aprontamentos só pra saber que no final das contas eu irei conseguir tirar um sorriso (às vezes até um choro kkk) da mina que eu gosto. 
-
-Meu bem, não sei o que acontece comigo, mas quando se trata de você e principalmente de nós eu sempre quero de alguma forma demonstrar carinho, por isso os aprontamentos quase que semanais kkkk. Mas eu não resisto aprontar de certa forma contigo, bons aprontamentos, obviamente.
-
-Agora como bônus do bônus, aqui vai uma dica de um tal presente que eu comprei pra você, que será entregue em mões, a dica é ‘você me diz que eu sou luz, seria eu a luz da sua animação preferida?!’, ficou meio complicada essa dica, mas você vai catar, eu tenho certeza! Bom, a gente se vê em breve em um novo aprotamento ou pessoalmente recebendo esse presente, não seeeei, joguei no ar hehe 💖.`;
+Ora, ora, ora, não é que a minha morena de belos olhos castanhos conseguiu platinar o meu game?! ...`;
 
 let i=0;
+
 const el=document.getElementById("textoFinal");
 
 function digitar(){
+
 if(i<texto.length){
+
 el.textContent+=texto.charAt(i);
+
 i++;
+
 setTimeout(digitar,30);
+
 }
+
 }
 
 digitar();
+
 }
 
 </script>
