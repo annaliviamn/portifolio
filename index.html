@@ -121,6 +121,28 @@ margin:auto;
 margin-top:20px;
 }
 
+/* LOADING DRAMA */
+
+#loadingBox{
+display:none;
+}
+
+#loadingBar{
+width:100%;
+background:#333;
+height:10px;
+border-radius:10px;
+overflow:hidden;
+margin-top:20px;
+}
+
+#loadingProgress{
+height:100%;
+width:0%;
+background:#00ffae;
+transition:1s;
+}
+
 </style>
 </head>
 
@@ -161,6 +183,14 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 
 <h2 id="pergunta"></h2>
 <div id="respostas"></div>
+
+<div id="loadingBox">
+<h2 id="loadingTexto"></h2>
+
+<div id="loadingBar">
+<div id="loadingProgress"></div>
+</div>
+</div>
 
 </div>
 
@@ -249,7 +279,7 @@ gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"
 },
 
 {
-q:"Questão 4 – Qual dia eu abri meu coração pra você sobre meus sentimentos? Você se lembra? Agora o bicho começa a pegar haha. Obs: Não vale colar olhando no zap.",
+q:"Questão 4 – Qual dia eu abri meu coração pra você sobre meus sentimentos?",
 op:["10/01/26","05/02/26","27/11/25","10/12/25","12/02/26"],
 certa:3,
 conquista:"Aprontona Emocionada",
@@ -271,7 +301,7 @@ gif:"https://media1.tenor.com/m/cKpndeTs1I0AAAAd/cute-cat.gif"
 },
 
 {
-q:"Questão Final – Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",
+q:"Questão Final – Quem conquistou o coração da Anna?",
 op:[
 "A Kika.",
 "Uma belíssima morena de olhos castanhos de Recife.",
@@ -288,10 +318,12 @@ gif:"https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif"
 
 let atual=0;
 
+/* MOSTRAR PERGUNTA */
+
 function mostrarPergunta(){
 
 if(atual>=perguntas.length){
-mostrarPlatina();
+mostrarDramaFinal();
 return;
 }
 
@@ -312,39 +344,16 @@ area.appendChild(btn);
 atualizarProgresso();
 }
 
+/* RESPOSTA */
+
 function responder(i){
 
 if(i===perguntas[atual].certa){
 
 mostrarConquista();
-
-/* DRAMA FINAL */
-
-if(atual===perguntas.length-1){
-
-setTimeout(()=>{
-
-document.getElementById("quiz").innerHTML=`
-<h2>⏳ Calculando resultado final...</h2>
-<p>Verificando banco de dados...</p>
-<p>Analisando nível de conhecimento sobre nós...</p>
-<p>Resultado quase pronto...</p>
-`;
-
-},1200);
-
-setTimeout(()=>{
-
-mostrarPlatina();
-
-},4200);
-
-}else{
-
 atual++;
-setTimeout(mostrarPergunta,2200);
 
-}
+setTimeout(mostrarPergunta,2200);
 
 }else{
 
@@ -354,6 +363,8 @@ location.reload();
 }
 
 }
+
+/* PROGRESSO */
 
 function atualizarProgresso(){
 const progresso=(atual/perguntas.length)*100;
@@ -379,26 +390,65 @@ ach.style.display="block";
 setTimeout(()=>ach.style.display="none",2000);
 }
 
-/* FINAL */
+/* DRAMA FINAL */
+
+function mostrarDramaFinal(){
+
+document.getElementById("pergunta").style.display="none";
+document.getElementById("respostas").style.display="none";
+
+const box=document.getElementById("loadingBox");
+box.style.display="block";
+
+const frases=[
+"Verificando banco de dados emocional...",
+"Analisando nível de conhecimento sobre nós...",
+"Consultando registros de momentos fofos...",
+"Calculando porcentagem de amor...",
+"Confirmando que você lembra de tudo...",
+"Resultado encontrado..."
+];
+
+let i=0;
+
+const texto=document.getElementById("loadingTexto");
+const barra=document.getElementById("loadingProgress");
+
+function proximo(){
+
+if(i<frases.length){
+
+texto.innerText=frases[i];
+barra.style.width=((i+1)/frases.length)*100+"%";
+
+i++;
+
+setTimeout(proximo,1200);
+
+}else{
+
+setTimeout(mostrarPlatina,1000);
+
+}
+
+}
+
+proximo();
+
+}
+
+/* PLATINA */
 
 function mostrarPlatina(){
 document.getElementById("quiz").style.display="none";
 document.getElementById("final").style.display="block";
 }
 
+/* CARTA */
+
 function mostrarCarta(){
 
-const texto=`Parabéns jogadora, você conseguiu gabaritar todo o game e como recompensa, aqui teremos uma nota especial da desenvolvedora do game para você.
-
-Ora, ora, ora, não é que a minha morena de belos olhos castanhos conseguiu platinar o meu game?! Só tendo os olhos MAIS LINDOS e BRILHANTES desse mundo para gabaritar tudo hehe. Estou um pouco quanto emocionada, você respondeu tudo certinho, o que significa que tu se lembra de tudo sobre nós, tal qual eu lembro de tudin, apesar de ter uma péssima memória, tudo o que vem de você sempre fica na minha mente. 
-
-Novamente eu aprontei com programação, tudo para conquistar seu belo coração, ih rapaz, rimei rs. Mas é uma delicia trabalhar nesses aprontamentos só pra saber que no final das contas eu irei conseguir tirar um sorriso (às vezes até um choro kkk) da mina que eu gosto. 
-
-Meu bem, não sei o que acontece comigo, mas quando se trata de você e principalmente de nós eu sempre quero de alguma forma demonstrar carinho, por isso os aprontamentos quase que semanais kkkk. Mas eu não resisto aprontar de certa forma contigo, bons aprontamentos, obviamente. 
-
-Agora como bônus do bônus, aqui vai uma dica de um tal presente que eu comprei pra você, que será entregue em mões, a dica é ‘você me diz que eu sou luz, seria eu a luz da sua animação preferida?!’, ficou meio complicada essa dica, mas você vai catar, eu tenho certeza! 
-
-Bom, a gente se vê em breve em um novo aprotamento ou pessoalmente recebendo esse presente, não seeeei, joguei no ar hehe 💖.`;
+const texto=`Parabéns jogadora, você conseguiu gabaritar todo o game e como recompensa...`;
 
 let i=0;
 const el=document.getElementById("textoFinal");
@@ -423,6 +473,7 @@ digitar();
 
 </body>
 </html>
+
 
 
 
