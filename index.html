@@ -16,15 +16,9 @@ color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-min-height:100vh;
+height:100vh;
 text-align:center;
-overflow-y:auto;
-padding:20px;
-}
-
-#container{
-max-width:700px;
-width:100%;
+overflow:hidden;
 }
 
 /* PRESS START */
@@ -83,7 +77,6 @@ right:20px;
 background:black;
 padding:15px;
 border-radius:12px;
-z-index:10;
 }
 
 #achievement img{
@@ -104,11 +97,6 @@ margin-top:10px;
 color:#ffd166;
 }
 
-#musicaSecreta{
-display:none;
-margin-top:20px;
-}
-
 /* FINAL */
 
 #final{
@@ -118,6 +106,8 @@ color:black;
 padding:25px;
 border-radius:15px;
 max-width:700px;
+max-height:90vh;
+overflow-y:auto;
 }
 
 #textoFinal{
@@ -130,38 +120,20 @@ line-height:1.6;
 
 <body>
 
-<div id="container">
+<div>
 
 <!-- PRESS START -->
-
 <div id="pressStart" onclick="startGame()">
-
 <h1>Que isso? Um minigame? Aperta Start ai pra ver</h1>
-
 <p class="piscar">PRESS START</p>
 
 <img id="gatoEgg"
-src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif">
-
+src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif"
+onclick="easterEgg(event)">
 <p id="segredo">💖 Você encontrou um segredo da Anna...</p>
-
-<div id="musicaSecreta">
-
-<iframe style="border-radius:12px"
-src="https://open.spotify.com/embed/track/3PlKQNlbL4767rND3HnqSI"
-width="100%"
-height="152"
-frameBorder="0"
-allowfullscreen=""
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-</iframe>
-
-</div>
-
 </div>
 
 <!-- QUIZ -->
-
 <div id="quiz">
 
 <div id="progressBar">
@@ -169,23 +141,17 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 </div>
 
 <h2 id="pergunta"></h2>
-
 <div id="respostas"></div>
 
 </div>
 
 <!-- CONQUISTA -->
-
 <div id="achievement">
-
 <h3 id="achTitle"></h3>
-
 <img id="achGif">
-
 </div>
 
 <!-- FINAL -->
-
 <div id="final">
 
 <h2>🏆 PLATINA DESBLOQUEADA</h2>
@@ -215,46 +181,80 @@ document.getElementById("quiz").style.display="block";
 mostrarPergunta();
 }
 
-/* EASTER EGG SEGURAR GATO */
+/* EASTER EGG */
 
-let tempoSegurando;
-
-const gato = document.getElementById("gatoEgg");
-
-gato.addEventListener("mousedown", function(){
-
-tempoSegurando=setTimeout(function(){
-
+function easterEgg(e){
+e.stopPropagation();
 document.getElementById("segredo").style.display="block";
-document.getElementById("musicaSecreta").style.display="block";
-
-alert("🏆 Conquista secreta desbloqueada!");
-
-},2000);
-
-});
-
-gato.addEventListener("mouseup", function(){
-clearTimeout(tempoSegurando);
-});
-
-gato.addEventListener("mouseleave", function(){
-clearTimeout(tempoSegurando);
-});
+}
 
 /* PERGUNTAS */
 
 const perguntas=[
 
-{q:"Questão 1: O que eu (Anna) mais gosto de fazer quando preparo uma surpresa para você?",op:["Aprontar.","Te tirar um sorriso.","Fazer você ficar bobinha.","Fazer você se sentir feliz e amada.","Todas as alternativas acima."],certa:4,conquista:"Aprontona Iniciante",gif:"https://media1.tenor.com/m/U2GZkWxTylQAAAAC/kitten-dance.gif"},
+{
+q:"Questão 1 – O que eu (Anna) mais gosto de fazer quando preparo uma surpresa para você?",
+op:["Aprontar.","Te tirar um sorriso.","Fazer você ficar bobinha.","Fazer você se sentir feliz e amada.","Todas as alternativas acima."],
+certa:4,
+conquista:"Aprontona Iniciante",
+gif:"https://media1.tenor.com/m/U2GZkWxTylQAAAAC/kitten-dance.gif"
+},
 
-{q:"Questão 2: Qual banda/artista nos uniu e qual música dessa banda/artista MAIS me lembra você?",op:["Linkin Park – Waiting for the End","Demi Lovato – o álbum de rock, vulgo Holy Fvck","Paramore – Hate to see your heart break","Alceu Valença – Flor de Tangerina","Kid Abelha - Lágrimas e Chuva"],certa:2,conquista:"Aprontona Musical",gif:"https://media1.tenor.com/m/IPvK5n4RNw0AAAAC/pet-music.gif"},
+{
+q:"Questão 2 – Qual banda/artista nos uniu e qual música dessa banda/artista MAIS me lembra você?",
+op:["Linkin Park – Waiting for the End","Demi Lovato – o álbum de rock, vulgo Holy Fvck","Paramore – Hate to see your heart break","Alceu Valença – Flor de Tangerina","Kid Abelha - Lágrimas e Chuva"],
+certa:2,
+conquista:"Aprontona Musical",
+gif:"https://media1.tenor.com/m/IPvK5n4RNw0AAAAC/pet-music.gif"
+},
 
-{q:"Questão 3: Qual desses jogos aqui foi o que começou de fato todas as brincadeiras bobas e gostosas do nosso relacionamento?",op:["Dark Souls","God of War","The Last of Us Part 2","Mario","Uncharted"],certa:2,conquista:"Aprontona Gamer",gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"},
+{
+q:"Questão 3 – Qual desses jogos aqui foi o que começou de fato todas as brincadeiras bobas e gostosas do nosso trelelê?",
+op:["Dark Souls","God of War","The Last of Us Part 2","Mario","Uncharted"],
+certa:2,
+conquista:"Aprontona Gamer",
+gif:"https://media1.tenor.com/m/9MyTRyvw8LEAAAAd/gaming-cat.gif"
+},
 
-{q:"Questão 4: Qual dia eu abri meu coração pra você sobre meus sentimentos? Você se lembra? Agora o bicho começa a pegar haha. Obs: Não vale colar olhando no zap.",op:["10/01/26","05/02/26","27/11/25","10/12/25","12/02/26"],certa:3,conquista:"Aprontona Emocionada",gif:"https://media1.tenor.com/m/td08jkIW7BsAAAAd/kira1310-rizz.gif"},
+{
+q:"Questão 4 –  Qual dia eu abri meu coração pra você sobre meus sentimentos? Você se lembra? Agora o bicho começa a pegar haha. Obs: Não vale colar olhando no zap.",
+op:["10/01/26","05/02/26","27/11/25","10/12/25","12/02/26"],
+certa:3,
+conquista:"Aprontona Emocionada",
+gif:"https://media1.tenor.com/m/td08jkIW7BsAAAAd/kira1310-rizz.gif"
+},
 
-{q:"Questão 5: Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",op:["A Kika.","Uma belíssima morena de olhos castanhos de Recife.","Você.","Eu já mencionei uma moça de olhos castanhos?!","Talvez todas as alternativas hehe"],certa:4,conquista:"🏆 PLATINA",gif:"https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif"}
+/* NOVA PERGUNTA */
+
+{
+q:"Questão 5 – Qual dessas coisas a Anna definitivamente faria?",
+op:[
+"Programar um jogo inteiro só pra te fazer sorrir.",
+"Aprontar mais uma surpresa semana que vem.",
+"Fazer você rir de algo completamente bobo.",
+"Te lembrar todos os dias o quanto você é especial.",
+"Sei não hein, acho que todas as alternativas hehe."
+],
+certa:4,
+conquista:"Aprontona Profissional",
+gif:"https://media1.tenor.com/m/cKpndeTs1I0AAAAd/cute-cat.gif"
+},
+
+/* PERGUNTA FINAL */
+
+{
+q:"Questão Final – Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",
+op:[
+"A Kika.",
+"Uma belíssima morena de olhos castanhos de Recife.",
+"Você.",
+"Eu já mencionei uma moça de olhos castanhos?!",
+"Talvez todas as alternativas hehe."
+],
+certa:4,
+conquista:"🏆 PLATINA",
+gif:"https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif"
+}
 
 ];
 
@@ -272,51 +272,33 @@ const p=perguntas[atual];
 document.getElementById("pergunta").innerText=p.q;
 
 const area=document.getElementById("respostas");
-
 area.innerHTML="";
 
 p.op.forEach((op,i)=>{
-
 const btn=document.createElement("button");
-
 btn.innerText=op;
-
 btn.onclick=()=>responder(i);
-
 area.appendChild(btn);
-
 });
 
 atualizarProgresso();
-
 }
 
 function responder(i){
 
 if(i===perguntas[atual].certa){
-
 mostrarConquista();
-
 atual++;
-
 setTimeout(mostrarPergunta,2200);
-
 }else{
-
 alert("❌ Oh noooous... game over 😓");
-
 location.reload();
-
 }
-
 }
 
 function atualizarProgresso(){
-
 const progresso=(atual/perguntas.length)*100;
-
 document.getElementById("progress").style.width=progresso+"%";
-
 }
 
 /* CONQUISTA */
@@ -336,17 +318,13 @@ perguntas[atual].gif;
 ach.style.display="block";
 
 setTimeout(()=>ach.style.display="none",2000);
-
 }
 
 /* FINAL */
 
 function mostrarPlatina(){
-
 document.getElementById("quiz").style.display="none";
-
 document.getElementById("final").style.display="block";
-
 }
 
 function mostrarCarta(){
@@ -364,29 +342,20 @@ Agora como bônus do bônus, aqui vai uma dica de um tal presente que eu comprei
 Bom, a gente se vê em breve em um novo aprotamento ou pessoalmente recebendo esse presente, não seeeei, joguei no ar hehe 💖.`;
 
 let i=0;
-
 const el=document.getElementById("textoFinal");
 
 function digitar(){
-
 if(i<texto.length){
-
 el.textContent+=texto.charAt(i);
-
 i++;
-
 setTimeout(digitar,30);
-
 }
-
 }
 
 digitar();
-
 }
 
 </script>
 
 </body>
 </html>
-
