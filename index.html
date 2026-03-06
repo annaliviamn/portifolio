@@ -115,6 +115,11 @@ white-space:pre-line;
 line-height:1.6;
 }
 
+#gifFinal{
+display:none;
+margin-top:15px;
+}
+
 </style>
 </head>
 
@@ -131,6 +136,15 @@ line-height:1.6;
 src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif"
 onclick="easterEgg(event)">
 <p id="segredo">💖 Você encontrou um segredo da Anna...</p>
+
+<!-- MÚSICA DO EASTER EGG -->
+<iframe id="musicaEgg" style="display:none;border-radius:12px;margin-top:10px"
+src="https://open.spotify.com/embed/track/3PlKQNlbL4767rND3HnqSI"
+width="300" height="80"
+frameBorder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+
 </div>
 
 <!-- QUIZ -->
@@ -154,13 +168,13 @@ onclick="easterEgg(event)">
 <!-- FINAL -->
 <div id="final">
 
-<h2>🏆 PLATINA DESBLOQUEADA</h2>
+<h2 id="tituloFinal">⏳ Calculando resultado...</h2>
 
 <button onclick="mostrarCarta()">Resgatar prêmio secreto</button>
 
 <p id="textoFinal"></p>
 
-<img width="220"
+<img id="gifFinal" width="220"
 src="https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif">
 
 </div>
@@ -186,6 +200,7 @@ mostrarPergunta();
 function easterEgg(e){
 e.stopPropagation();
 document.getElementById("segredo").style.display="block";
+document.getElementById("musicaEgg").style.display="block";
 }
 
 /* PERGUNTAS */
@@ -224,8 +239,6 @@ conquista:"Aprontona Emocionada",
 gif:"https://media1.tenor.com/m/td08jkIW7BsAAAAd/kira1310-rizz.gif"
 },
 
-/* NOVA PERGUNTA */
-
 {
 q:"Questão 5 – Qual dessas coisas a Anna definitivamente faria?",
 op:[
@@ -239,8 +252,6 @@ certa:4,
 conquista:"Aprontona Profissional",
 gif:"https://media1.tenor.com/m/cKpndeTs1I0AAAAd/cute-cat.gif"
 },
-
-/* PERGUNTA FINAL */
 
 {
 q:"Questão Final – Essa é a pergunta final, obviamente a mais difícil, se você acertar, a conquista de platina vem aí. Então vamo lá, quem é que conquistou o coração da Anna?",
@@ -320,36 +331,68 @@ ach.style.display="block";
 setTimeout(()=>ach.style.display="none",2000);
 }
 
-/* FINAL */
+/* DRAMA ANTES DA PLATINA */
 
 function mostrarPlatina(){
+
 document.getElementById("quiz").style.display="none";
 document.getElementById("final").style.display="block";
+
+const frases=[
+"Analisando respostas...",
+"Calculando nível de romance...",
+"Consultando banco de dados da Anna...",
+"Resultado encontrado..."
+];
+
+let i=0;
+const titulo=document.getElementById("tituloFinal");
+
+function drama(){
+
+if(i<frases.length){
+titulo.innerText=frases[i];
+i++;
+setTimeout(drama,1200);
+}else{
+titulo.innerText="🏆 PLATINA DESBLOQUEADA";
 }
+
+}
+
+drama();
+
+}
+
+/* CARTA FINAL */
 
 function mostrarCarta(){
 
 const texto=`Parabéns jogadora, você conseguiu gabaritar todo o game e como recompensa, aqui teremos uma nota especial da desenvolvedora do game para você.
 
-Ora, ora, ora, não é que a minha morena de belos olhos castanhos conseguiu platinar o meu game?! Só tendo os olhos MAIS LINDOS e BRILHANTES desse mundo para gabaritar tudo hehe. Estou um pouco quanto emocionada, você respondeu tudo certinho, o que significa que tu se lembra de tudo sobre nós, tal qual eu lembro de tudin, apesar de ter uma péssima memória, tudo o que vem de você sempre fica na minha mente. 
+Ora, ora, ora, não é que a minha morena de belos olhos castanhos conseguiu platinar o meu game?! Só tendo os olhos MAIS LINDOS e BRILHANTES desse mundo para gabaritar tudo hehe. Estou um pouco quanto emocionada, você respondeu tudo certinho, o que significa que tu se lembra de tudo sobre nós, tal qual eu lembro de tudin.
 
-Novamente eu aprontei com programação, tudo para conquistar seu belo coração, ih rapaz, rimei rs. Mas é uma delicia trabalhar nesses aprontamentos só pra saber que no final das contas eu irei conseguir tirar um sorriso (às vezes até um choro kkk) da mina que eu gosto. 
+Novamente eu aprontei com programação, tudo para conquistar seu belo coração.
 
-Meu bem, não sei o que acontece comigo, mas quando se trata de você e principalmente de nós eu sempre quero de alguma forma demonstrar carinho, por isso os aprontamentos quase que semanais kkkk. Mas eu não resisto aprontar de certa forma contigo, bons aprontamentos, obviamente. 
+Meu bem, quando se trata de você eu sempre quero demonstrar carinho de alguma forma, por isso os aprontamentos quase semanais.
 
-Agora como bônus do bônus, aqui vai uma dica de um tal presente que eu comprei pra você, que será entregue em mões, a dica é ‘você me diz que eu sou luz, seria eu a luz da sua animação preferida?!’, ficou meio complicada essa dica, mas você vai catar, eu tenho certeza! 
+Agora como bônus do bônus, aqui vai uma dica do presente que comprei pra você: ‘você me diz que eu sou luz, seria eu a luz da sua animação preferida?!’.
 
-Bom, a gente se vê em breve em um novo aprotamento ou pessoalmente recebendo esse presente, não seeeei, joguei no ar hehe 💖.`;
+Bom, a gente se vê em breve em um novo aprontamento ou pessoalmente recebendo esse presente hehe 💖.`;
 
 let i=0;
 const el=document.getElementById("textoFinal");
 
 function digitar(){
+
 if(i<texto.length){
 el.textContent+=texto.charAt(i);
 i++;
 setTimeout(digitar,30);
+}else{
+document.getElementById("gifFinal").style.display="block";
 }
+
 }
 
 digitar();
