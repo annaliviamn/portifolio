@@ -394,12 +394,10 @@ setTimeout(()=>ach.style.display="none",2000);
 
 function mostrarDramaFinal(){
 
-document.getElementById("pergunta").style.display="none";
-document.getElementById("respostas").style.display="none";
+/* ESCONDE TODO O QUIZ */
+document.getElementById("quiz").style.display="none";
 
-/* ESCONDE A BARRA DO QUIZ */
-document.getElementById("progressBar").style.display="none";
-
+/* MOSTRA O LOADING DRAMÁTICO */
 const box=document.getElementById("loadingBox");
 box.style.display="block";
 
@@ -485,6 +483,7 @@ digitar();
 
 </body>
 </html>
+
 
 
 
