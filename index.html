@@ -315,12 +315,42 @@ atualizarProgresso();
 function responder(i){
 
 if(i===perguntas[atual].certa){
+
 mostrarConquista();
+
+/* SE FOR A ÚLTIMA PERGUNTA → DRAMA */
+
+if(atual === perguntas.length-1){
+
+setTimeout(()=>{
+
+document.getElementById("quiz").innerHTML = `
+<h2>⏳ Calculando resultado final...</h2>
+<p>A desenvolvedora está avaliando suas respostas...</p>
+<p>Isso pode levar alguns segundos...</p>
+`;
+
+},1200);
+
+setTimeout(()=>{
+
+mostrarPlatina();
+
+},4200);
+
+}else{
+
 atual++;
 setTimeout(mostrarPergunta,2200);
+
+}
+
 }else{
+
 alert("❌ Oh noooous... game over 😓");
 location.reload();
+
+}
 }
 }
 
@@ -391,6 +421,7 @@ digitar();
 
 </body>
 </html>
+
 
 
 
