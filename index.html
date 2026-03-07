@@ -23,9 +23,7 @@ overflow:hidden;
 
 /* PRESS START */
 
-#pressStart{
-cursor:pointer;
-}
+#pressStart{cursor:pointer;}
 
 .piscar{
 animation:piscando 1s infinite;
@@ -40,13 +38,20 @@ animation:piscando 1s infinite;
 #quiz{display:none;}
 
 button{
-padding:12px 20px;
-margin:8px;
+padding:16px;
+margin:12px;
 border:none;
-border-radius:8px;
-background:#2a6cff;
-color:white;
+border-radius:10px;
+background:#f4c542;
+color:black;
+font-size:18px;
 cursor:pointer;
+width:90%;
+max-width:400px;
+}
+
+button:active{
+transform:scale(0.95);
 }
 
 /* PROGRESSO */
@@ -121,11 +126,42 @@ margin:auto;
 margin-top:20px;
 }
 
-/* LOADING DRAMA */
+/* PRESENTE */
 
-#loadingBox{
+#presenteBox{
 display:none;
+margin-top:20px;
 }
+
+#presenteImg{
+width:260px;
+opacity:0;
+transform:scale(0.8);
+transition:all 1.5s ease;
+}
+
+#presenteImg.mostrar{
+opacity:1;
+transform:scale(1);
+}
+
+/* FEEDBACK */
+
+#feedbackBox{
+display:none;
+margin-top:20px;
+}
+
+#feedbackTexto{
+width:100%;
+height:80px;
+border-radius:8px;
+padding:10px;
+}
+
+/* LOADING */
+
+#loadingBox{display:none;}
 
 #loadingBar{
 width:100%;
@@ -151,30 +187,32 @@ transition:1s;
 <div>
 
 <!-- PRESS START -->
+
 <div id="pressStart" onclick="startGame()">
+
 <h1>Que isso? Um minigame? Aperta Start ai pra ver</h1>
+
 <p class="piscar">PRESS START</p>
 
 <img id="gatoEgg"
 src="https://media.tenor.com/ZunkrTKhWb0AAAAj/kimchi-foxiekt.gif"
 onclick="easterEgg(event)">
 
-<p id="segredo">Você encontrou um segredinho 👀💖...</p>
+<p id="segredo">Opa! O que é isso? Um easter egg? 👀💖</p>
 
-<div id="spotifyEgg" style="display:none; margin-top:15px;">
+<div id="spotifyEgg" style="display:none;margin-top:15px;">
 <iframe style="border-radius:12px"
 src="https://open.spotify.com/embed/track/3PlKQNlbL4767rND3HnqSI"
 width="300"
 height="80"
-frameborder="0"
-allowfullscreen=""
-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+frameborder="0">
 </iframe>
 </div>
 
 </div>
 
 <!-- QUIZ -->
+
 <div id="quiz">
 
 <div id="progressBar">
@@ -182,25 +220,30 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 </div>
 
 <h2 id="pergunta"></h2>
+
 <div id="respostas"></div>
 
 <div id="loadingBox">
+
 <h2 id="loadingTexto"></h2>
 
 <div id="loadingBar">
 <div id="loadingProgress"></div>
 </div>
+
 </div>
 
 </div>
 
 <!-- CONQUISTA -->
+
 <div id="achievement">
 <h3 id="achTitle"></h3>
 <img id="achGif">
 </div>
 
 <!-- FINAL -->
+
 <div id="final">
 
 <h2>🏆 PLATINA DESBLOQUEADA</h2>
@@ -211,7 +254,41 @@ allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-pictur
 
 <img id="gatinhoFinal"
 width="220"
-src="https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif">
+src="https://media1.tenor.com/m/93-t4YIycjQAAAAd/doggo-dog.gif">
+
+<!-- PRESENTE -->
+
+<div id="presenteBox">
+
+<h3>Easter Egg desbloqueado! O que será?!</h3>
+
+<p>Acho que você merece uma recompensa...</p>
+
+<img id="presenteImg"
+src="https://i.postimg.cc/dV8Pcxdn/IMG-3151.jpg">
+
+<p>Chega de mistérios! Olha a surpresa ai 💝.</p>
+
+</div>
+
+<!-- FEEDBACK -->
+
+<div id="feedbackBox">
+
+<h3>Deixe seu Feedback</h3>
+
+<textarea
+id="feedbackTexto"
+placeholder="O que você achou do jogo?">
+</textarea>
+
+<br><br>
+
+<button onclick="enviarFeedback()">Enviar feedback</button>
+
+<p id="msgFeedback"></p>
+
+</div>
 
 </div>
 
@@ -223,32 +300,37 @@ src="https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif">
 
 <script>
 
-/* PRESS START */
+/* EMBARALHAR */
 
-function startGame(){
-document.getElementById("pressStart").style.display="none";
-document.getElementById("quiz").style.display="block";
-mostrarPergunta();
+function embaralhar(array){
+for(let i=array.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[array[i],array[j]]=[array[j],array[i]];
+}
+return array;
 }
 
-/* EASTER EGG */
-
-let segurarTimer;
+/* EASTER EGG INICIO */
 
 function easterEgg(e){
-e.stopPropagation();
 
-segurarTimer=setTimeout(()=>{
+e.stopPropagation();
 
 document.getElementById("segredo").style.display="block";
 document.getElementById("spotifyEgg").style.display="block";
 
-},1500);
 }
 
-document.getElementById("gatoEgg").addEventListener("mouseup",()=>{
-clearTimeout(segurarTimer);
-});
+/* START */
+
+function startGame(){
+
+document.getElementById("pressStart").style.display="none";
+document.getElementById("quiz").style.display="block";
+
+mostrarPergunta();
+
+}
 
 /* PERGUNTAS */
 
@@ -264,7 +346,7 @@ gif:"https://media1.tenor.com/m/U2GZkWxTylQAAAAC/kitten-dance.gif"
 
 {
 q:"Questão 2 – Qual banda/artista nos uniu e qual música dessa banda/artista MAIS me lembra você?",
-op:["Linkin Park – Waiting for the End","Demi Lovato – o álbum de rock, vulgo Holy Fvck","Paramore – Hate to see your heart break","Alceu Valença – Flor de Tangerina","Kid Abelha - Lágrimas e Chuva"],
+op:["Linkin Park – Waiting for the End","Demi Lovato – Holy Fvck","Paramore – Hate to see your heart break","Alceu Valença – Flor de Tangerina","Kid Abelha - Lágrimas e Chuva"],
 certa:2,
 conquista:"Aprontona Musical",
 gif:"https://media1.tenor.com/m/IPvK5n4RNw0AAAAC/pet-music.gif"
@@ -318,7 +400,7 @@ gif:"https://media1.tenor.com/m/7a7NOeiN2RwAAAAC/cat-love.gif"
 
 let atual=0;
 
-/* MOSTRAR PERGUNTA */
+/* PERGUNTA */
 
 function mostrarPergunta(){
 
@@ -334,14 +416,19 @@ document.getElementById("pergunta").innerText=p.q;
 const area=document.getElementById("respostas");
 area.innerHTML="";
 
-p.op.forEach((op,i)=>{
+const opcoes=p.op.map((texto,i)=>({texto,i}));
+
+embaralhar(opcoes);
+
+opcoes.forEach(opcao=>{
 const btn=document.createElement("button");
-btn.innerText=op;
-btn.onclick=()=>responder(i);
+btn.innerText=opcao.texto;
+btn.onclick=()=>responder(opcao.i);
 area.appendChild(btn);
 });
 
 atualizarProgresso();
+
 }
 
 /* RESPOSTA */
@@ -351,6 +438,7 @@ function responder(i){
 if(i===perguntas[atual].certa){
 
 mostrarConquista();
+
 atual++;
 
 setTimeout(mostrarPergunta,2200);
@@ -358,17 +446,19 @@ setTimeout(mostrarPergunta,2200);
 }else{
 
 alert("❌ Oh noooous... game over 😓");
+
 location.reload();
 
 }
 
 }
 
-/* PROGRESSO */
-
 function atualizarProgresso(){
+
 const progresso=(atual/perguntas.length)*100;
+
 document.getElementById("progress").style.width=progresso+"%";
+
 }
 
 /* CONQUISTA */
@@ -388,18 +478,15 @@ perguntas[atual].gif;
 ach.style.display="block";
 
 setTimeout(()=>ach.style.display="none",2000);
+
 }
 
 /* DRAMA FINAL */
 
 function mostrarDramaFinal(){
 
-/* ESCONDE TODO O QUIZ */
 document.getElementById("quiz").style.display="none";
-
-/* MOSTRA O LOADING DRAMÁTICO */
-const box=document.getElementById("loadingBox");
-box.style.display="block";
+document.getElementById("loadingBox").style.display="block";
 
 const frases=[
 "Verificando banco de dados emocional...",
@@ -419,6 +506,7 @@ function proximo(){
 if(i<frases.length){
 
 texto.innerText=frases[i];
+
 barra.style.width=((i+1)/frases.length)*100+"%";
 
 i++;
@@ -437,11 +525,11 @@ proximo();
 
 }
 
-/* PLATINA */
-
 function mostrarPlatina(){
-document.getElementById("quiz").style.display="none";
+
+document.getElementById("loadingBox").style.display="none";
 document.getElementById("final").style.display="block";
+
 }
 
 /* CARTA */
@@ -460,22 +548,58 @@ Agora como bônus do bônus, aqui vai uma dica de um tal presente que eu comprei
 
 Bom, a gente se vê em breve em um novo aprotamento ou pessoalmente recebendo esse presente, não seeeei, joguei no ar hehe 💖.`;
 
+/* DIGITAÇÃO */
+
 let i=0;
+
 const el=document.getElementById("textoFinal");
 
 function digitar(){
 
 if(i<texto.length){
+
 el.textContent+=texto.charAt(i);
+
 i++;
+
 setTimeout(digitar,30);
+
 }else{
+
 document.getElementById("gatinhoFinal").style.display="block";
+
+setTimeout(()=>{
+
+document.getElementById("presenteBox").style.display="block";
+
+setTimeout(()=>{
+document.getElementById("presenteImg").classList.add("mostrar");
+},800);
+
+},800);
+
+document.getElementById("feedbackBox").style.display="block";
+
 }
 
 }
 
 digitar();
+
+}
+
+/* FEEDBACK */
+
+function enviarFeedback(){
+
+const texto=document.getElementById("feedbackTexto").value;
+
+if(texto.trim()===""){
+alert("Poxa, cadê meu feedback? 😭");
+return;
+}
+
+document.getElementById("msgFeedback").innerText="Feedback recebido ❤️";
 
 }
 
