@@ -8,281 +8,386 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+:root{
+--azul:#0d1b3d;
+--azul2:#1e3a8a;
+--amarelo:#f4c542;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8fafc;
-    color: #334155;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-section {
-    padding: 80px 20px;
-    text-align: center;
+body{
+font-family:'Inter',sans-serif;
+background:linear-gradient(180deg,var(--azul),#050b20);
+color:white;
 }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
+/* SECTIONS */
+
+section{
+padding:80px 20px;
+text-align:center;
 }
 
-h1, h2 {
-    color: #1e3a8a;
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+h1,h2{
+color:var(--amarelo);
 }
 
 /* HERO */
-.hero p {
-    margin-top: 20px;
-    font-size: 20px;
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
+
+.hero p{
+margin-top:20px;
+font-size:20px;
+max-width:650px;
+margin-left:auto;
+margin-right:auto;
 }
 
-.buttons {
-    margin-top: 30px;
+/* BOTÕES */
+
+.buttons{
+margin-top:30px;
 }
 
-button {
-    padding: 12px 24px;
-    margin: 10px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
+button{
+padding:12px 24px;
+margin:10px;
+border-radius:8px;
+border:none;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
 }
 
-.primary {
-    background-color: #2563eb;
-    color: rgb(156, 154, 154);
+.primary{
+background:var(--amarelo);
+color:#000;
 }
 
-.primary:hover {
-    background-color: #1e40af;
+.primary:hover{
+transform:scale(1.05);
 }
 
-.secondary {
-    background-color: white;
-    border: 2px solid #2563eb;
-    color: #2563eb;
+.secondary{
+background:transparent;
+border:2px solid var(--amarelo);
+color:var(--amarelo);
 }
 
-.secondary:hover {
-    background-color: #2563eb;
-    color: white;
+.secondary:hover{
+background:var(--amarelo);
+color:#000;
 }
 
 /* SOBRE */
-.sobre p {
-    max-width: 750px;
-    margin: 20px auto;
-    line-height: 1.6;
+
+.sobre p{
+max-width:750px;
+margin:20px auto;
+line-height:1.6;
 }
 
 /* STACK */
-.stack-grid {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+
+.stack-grid{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
 }
 
-.stack-card {
-    background: white;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
+.stack-card{
+background:#101b40;
+padding:25px;
+border-radius:14px;
+box-shadow:0 4px 14px rgba(0,0,0,0.4);
+transition:0.3s;
 }
 
-.stack-card:hover {
-    transform: translateY(-6px);
+.stack-card:hover{
+transform:translateY(-6px);
 }
 
 /* PROJETOS */
-.projetos-grid {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+
+.projetos-grid{
+margin-top:40px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
 }
 
-.projeto-card {
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    transition: 0.3s ease;
-    text-align: left;
+.projeto-card{
+background:#101b40;
+padding:25px;
+border-radius:16px;
+box-shadow:0 6px 18px rgba(0,0,0,0.4);
+transition:0.3s;
+text-align:left;
 }
 
-.projeto-card:hover {
-    transform: translateY(-6px);
+.projeto-card:hover{
+transform:translateY(-6px);
 }
 
-.projeto-card h3 {
-    color: #1e3a8a;
-    margin-bottom: 10px;
+.projeto-card h3{
+color:var(--amarelo);
+margin-bottom:10px;
 }
 
-.projeto-card p {
-    font-size: 14px;
-    margin-bottom: 10px;
+.projeto-card p{
+font-size:14px;
+margin-bottom:10px;
 }
 
-.tecnologias {
-    font-size: 13px;
-    color: #2563eb;
-    font-weight: 600;
+.tecnologias{
+font-size:13px;
+color:#7dd3fc;
+font-weight:600;
 }
 
 /* CONTATO */
-.contato a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
+
+.contato a{
+display:inline-block;
+margin-top:10px;
+color:var(--amarelo);
+text-decoration:none;
+font-weight:600;
 }
 
 /* ANIMAÇÃO */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 0.8s ease;
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:0.8s;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+.reveal.active{
+opacity:1;
+transform:translateY(0);
 }
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+section{
+padding:60px 20px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+button{
+width:80%;
+}
+
+.projeto-card{
+text-align:center;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
 <section class="hero reveal">
-    <div class="container">
-        <h1>Anna Livia Maciel do Nascimento</h1>
-        <p>
-            Desenvolvedora Web em formação, estudante de Análise e Desenvolvimento de Sistemas (3º semestre),
-            com foco em desenvolvimento web e banco de dados.
-        </p>
+<div class="container">
 
-        <div class="buttons">
-            <button class="primary" onclick="scrollToSection('projetos')">Ver Projetos</button>
-            <button class="secondary" onclick="window.open('https://github.com/annaliviamn')">GitHub</button>
-            <button class="secondary" onclick="window.open('https://www.linkedin.com/in/annaliviamaciel/')">LinkedIn</button>
-        </div>
-    </div>
+<h1>Anna Livia Maciel do Nascimento</h1>
+
+<p>
+Desenvolvedora Web em formação, estudante de Análise e Desenvolvimento de Sistemas (3º semestre),
+com foco em desenvolvimento web e banco de dados.
+</p>
+
+<div class="buttons">
+
+<button class="primary" onclick="scrollToSection('projetos')">
+Ver Projetos
+</button>
+
+<button class="secondary"
+onclick="window.open('https://github.com/annaliviamn')">
+GitHub
+</button>
+
+<button class="secondary"
+onclick="window.open('https://www.linkedin.com/in/annaliviamaciel/')">
+LinkedIn
+</button>
+
+</div>
+
+</div>
 </section>
+
 
 <section class="sobre reveal">
-    <div class="container">
-        <h2>Sobre Mim</h2>
-        <p>
-            Atualmente curso Análise e Desenvolvimento de Sistemas e venho desenvolvendo projetos acadêmicos 
-            voltados para lógica de programação, desenvolvimento web e modelagem de banco de dados.
-        </p>
-        <p>
-            Busco oportunidade de estágio para aplicar meus conhecimentos técnicos em um ambiente profissional,
-            contribuindo com projetos reais enquanto continuo evoluindo na área de tecnologia.
-        </p>
-    </div>
+
+<div class="container">
+
+<h2>Sobre Mim</h2>
+
+<p>
+Atualmente curso Análise e Desenvolvimento de Sistemas e venho desenvolvendo projetos acadêmicos 
+voltados para lógica de programação, desenvolvimento web e modelagem de banco de dados.
+</p>
+
+<p>
+Busco oportunidade de estágio para aplicar meus conhecimentos técnicos em um ambiente profissional,
+contribuindo com projetos reais enquanto continuo evoluindo na área de tecnologia.
+</p>
+
+</div>
 </section>
+
 
 <section class="stack reveal">
-    <div class="container">
-        <h2>Stack Técnica</h2>
 
-        <div class="stack-grid">
-            <div class="stack-card">
-                <strong>Desenvolvimento Web</strong>
-                <p>HTML5, CSS3, JavaScript</p>
-            </div>
+<div class="container">
 
-            <div class="stack-card">
-                <strong>Banco de Dados</strong>
-                <p>SQL, Modelagem de Dados</p>
-            </div>
+<h2>Stack Técnica</h2>
 
-            <div class="stack-card">
-                <strong>Ferramentas</strong>
-                <p>Git, GitHub, Visual Studio Code</p>
-            </div>
-        </div>
-    </div>
+<div class="stack-grid">
+
+<div class="stack-card">
+<strong>Desenvolvimento Web</strong>
+<p>HTML5, CSS3, JavaScript</p>
+</div>
+
+<div class="stack-card">
+<strong>Banco de Dados</strong>
+<p>SQL, Modelagem de Dados</p>
+</div>
+
+<div class="stack-card">
+<strong>Ferramentas</strong>
+<p>Git, GitHub, Visual Studio Code</p>
+</div>
+
+</div>
+</div>
 </section>
+
 
 <section class="projetos reveal" id="projetos">
-    <div class="container">
-        <h2>Projetos Acadêmicos</h2>
 
-        <div class="projetos-grid">
+<div class="container">
 
-            <!-- S.O.S Patinhas -->
-            <div class="projeto-card">
-                <h3>S.O.S Patinhas 🐾</h3>
-                <p>
-                    Site institucional desenvolvido como projeto acadêmico para uma ONG fictícia de adoção
-                    de animais. O projeto apresenta informações sobre adoção responsável, ações voluntárias
-                    e formulário interativo para interessados em adoção.
-                </p>
+<h2>Projetos Acadêmicos</h2>
 
-                <p class="tecnologias">
-                    Tecnologias: HTML5, CSS3
-                </p>
+<div class="projetos-grid">
 
-                <button class="secondary"
-                onclick="window.open('https://annaliviamn.github.io/laramigo/')">
-                    Ver Projeto
-                </button>
-            </div>
+<!-- SOS PATINHAS -->
 
-            <div class="projeto-card">
-                <h3>Projeto 2</h3>
-                <p>Breve descrição do objetivo do projeto e como foi estruturado.</p>
-                <p class="tecnologias">Tecnologias: SQL, Modelagem de Dados</p>
-            </div>
+<div class="projeto-card">
 
-        </div>
-    </div>
+<h3>S.O.S Patinhas 🐾</h3>
+
+<p>
+Site institucional desenvolvido como projeto acadêmico para uma ONG fictícia de adoção
+de animais.
+</p>
+
+<p class="tecnologias">
+Tecnologias: HTML5, CSS3
+</p>
+
+<button class="secondary"
+onclick="window.open('https://annaliviamn.github.io/laramigo/')">
+
+Ver Projeto
+
+</button>
+
+</div>
+
+
+<!-- BANCO DE DADOS (APRONTÃO) -->
+
+<div class="projeto-card">
+
+<h3>Sistema de Banco de Dados</h3>
+
+<p>
+Projeto acadêmico de modelagem e implementação de banco de dados para gerenciamento
+de registros hospitalares utilizando SQL.
+</p>
+
+<p class="tecnologias">
+Tecnologias: SQL, Modelagem de Dados
+</p>
+
+<button class="secondary"
+onclick="window.open('https://github.com/annaliviamn/banco-dados-projeto')">
+
+Ver Código no GitHub
+
+</button>
+
+</div>
+
+</div>
+</div>
 </section>
+
 
 <section class="contato reveal">
-    <div class="container">
-        <h2>Contato</h2>
-        <p>Email: annaliviamaciel@gmail.com</p>
-        <a href="https://github.com/annaliviamn">GitHub</a><br>
-        <a href="https://www.linkedin.com/in/annaliviamaciel/">LinkedIn</a>
-    </div>
+
+<div class="container">
+
+<h2>Contato</h2>
+
+<p>Email: annaliviamaciel@gmail.com</p>
+
+<a href="https://github.com/annaliviamn">GitHub</a><br>
+<a href="https://www.linkedin.com/in/annaliviamaciel/">LinkedIn</a>
+
+</div>
 </section>
 
+
 <script>
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-const reveals = document.querySelectorAll('.reveal');
+const reveals=document.querySelectorAll('.reveal');
 
-window.addEventListener('scroll', () => {
-    reveals.forEach(reveal => {
-        const windowHeight = window.innerHeight;
-        const revealTop = reveal.getBoundingClientRect().top;
-        const revealPoint = 100;
+window.addEventListener('scroll',()=>{
 
-        if(revealTop < windowHeight - revealPoint){
-            reveal.classList.add('active');
-        }
-    });
+reveals.forEach(reveal=>{
+
+const windowHeight=window.innerHeight;
+const revealTop=reveal.getBoundingClientRect().top;
+const revealPoint=100;
+
+if(revealTop < windowHeight - revealPoint){
+reveal.classList.add('active');
+}
+
 });
+
+});
+
 </script>
 
 </body>
 </html>
-
