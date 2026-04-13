@@ -31,7 +31,8 @@ section {
 }
 
 h1, h2 {
-    color: #1e3a8a;
+    color: #6c63ff;
+    font-weight: 700;
 }
 
 /* HERO */
@@ -54,16 +55,16 @@ button {
     border: none;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .primary {
-    background-color: #2563eb;
-    color: rgb(156, 154, 154);
+    background-color: #6c63ff;
+    color: white;
 }
 
 .primary:hover {
-    background-color: #1e40af;
+    background-color: #574fd6;
 }
 
 .secondary {
@@ -80,7 +81,7 @@ button {
 /* SOBRE */
 .sobre p {
     max-width: 750px;
-    margin: 20px auto;
+    margin: 15px auto;
     line-height: 1.6;
 }
 
@@ -126,7 +127,7 @@ button {
 }
 
 .projeto-card h3 {
-    color: #1e3a8a;
+    color: #6c63ff;
     margin-bottom: 10px;
 }
 
@@ -170,8 +171,8 @@ button {
     <div class="container">
         <h1>Anna Livia Maciel do Nascimento</h1>
         <p>
-            Desenvolvedora Web em formação, estudante de Análise e Desenvolvimento de Sistemas (3º semestre),
-            com foco em desenvolvimento web e banco de dados.
+            Desenvolvedora Web em formação focada em criar aplicações web completas, 
+            integrando front-end, back-end e banco de dados.
         </p>
 
         <div class="buttons">
@@ -186,12 +187,12 @@ button {
     <div class="container">
         <h2>Sobre Mim</h2>
         <p>
-            Atualmente curso Análise e Desenvolvimento de Sistemas e venho desenvolvendo projetos acadêmicos 
-            voltados para lógica de programação, desenvolvimento web e modelagem de banco de dados.
+            Sou estudante de Análise e Desenvolvimento de Sistemas e venho desenvolvendo
+            projetos práticos com foco em aplicações web completas.
         </p>
         <p>
-            Busco oportunidade de estágio para aplicar meus conhecimentos técnicos em um ambiente profissional,
-            contribuindo com projetos reais enquanto continuo evoluindo na área de tecnologia.
+            Tenho interesse em desenvolvimento fullstack e busco uma oportunidade de estágio
+            para aplicar meus conhecimentos em projetos reais, enquanto continuo evoluindo na área.
         </p>
     </div>
 </section>
@@ -203,7 +204,7 @@ button {
         <div class="stack-grid">
             <div class="stack-card">
                 <strong>Desenvolvimento Web</strong>
-                <p>HTML5, CSS3, JavaScript</p>
+                <p>HTML5, CSS3, JavaScript (ES6+)</p>
             </div>
 
             <div class="stack-card">
@@ -225,22 +226,25 @@ button {
 
         <div class="projetos-grid">
 
-            <!-- S.O.S Patinhas -->
             <div class="projeto-card">
-                <h3>S.O.S Patinhas 🐾</h3>
+                <h3>Sistema de Adoção de Pets (Fullstack) 🐾</h3>
                 <p>
-                    Site institucional desenvolvido como projeto acadêmico para uma ONG fictícia de adoção
-                    de animais. O projeto apresenta informações sobre adoção responsável, ações voluntárias
-                    e formulário interativo para interessados em adoção.
+                    Aplicação fullstack para adoção de pets, com API desenvolvida em Node.js e banco de dados SQLite.
+                    Permite cadastro e listagem de animais, com exibição dinâmica no front-end.
                 </p>
 
                 <p class="tecnologias">
-                    Tecnologias: HTML5, CSS3
+                    Tecnologias: HTML, CSS, JavaScript, Node.js, Express, SQLite
                 </p>
 
                 <button class="secondary"
                 onclick="window.open('https://annaliviamn.github.io/laramigo/')">
                     Ver Projeto
+                </button>
+
+                <button class="secondary"
+                onclick="window.open('https://github.com/annaliviamn')">
+                    Ver Código
                 </button>
             </div>
 
@@ -257,7 +261,7 @@ button {
 <section class="contato reveal">
     <div class="container">
         <h2>Contato</h2>
-        <p>Email: annaliviamaciel@gmail.com</p>
+        <p><strong>Email:</strong> annaliviamaciel@gmail.com</p>
         <a href="https://github.com/annaliviamn">GitHub</a><br>
         <a href="https://www.linkedin.com/in/annaliviamaciel/">LinkedIn</a>
     </div>
